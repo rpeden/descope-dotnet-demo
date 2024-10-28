@@ -8,8 +8,7 @@ namespace DescopeTestApp.Pages
     {
         public void OnGet()
         {
-            var user = User;
-            Console.WriteLine("hi");
+
         }
     }
 }
