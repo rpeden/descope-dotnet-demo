@@ -1,0 +1,18 @@
+﻿@page
+@using System.Security.Claims
+@model DescopeTestApp.Pages.ProtectedModel
+@{
+    var userName = User.Identity?.Name ?? "unknown";
+    var emailAddress = User.Claims.Where(c => c.Type == ClaimTypes.Email)
+                                          .Select(c => c.Value)
+                                          .DefaultIfEmpty("unknown")
+                                          .FirstOrDefault();
+}
+
+<h3>Secure Page</h3>
+
+If you can see this, it means you are signed in!
+
+<div>Name: @userName</div>
+
+<div>Email: @emailAddress</div>

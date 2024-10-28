@@ -1,0 +1,49 @@
+﻿@page
+@model DescopeTestApp.Pages.LoginModel
+@{
+}
+<h3>Login</h3>
+
+<div class="login-container">
+	<div class="descope-login">
+		<descope-wc project-id="P2nqZ7QDr7IH1HC1qxL6wyiMRQXq"
+					flow-id="sign-up-or-in"
+					theme="light" />
+	</div>
+</div>
+
+<form id="login" method="post">
+	<input type="hidden" name="JwtToken" />
+	<input type="hidden" name="RefreshToken" />
+</form>
+
+<script>
+	const wcElement = document.getElementsByTagName('descope-wc')[0];
+
+	const onSuccess = async (e) => {
+		console.log(e.detail.user.name)
+		console.log(e.detail.user.email)
+		const jwtToken = e.detail.sessionJwt;
+		const refreshToken = e.detail.refreshJwt;
+
+		const loginForm = document.querySelector('#login');
+		const sessionField = document.querySelector('input[name="JwtToken"]');
+		const refreshField = document.querySelector('input[name="RefreshToken"]');
+		
+		console.log(jwtToken);
+		console.log(refreshToken)
+		sessionField.value = jwtToken;
+		refreshField.value = refreshToken;
+		loginForm.submit();
+
+		if (response.ok) {
+			window.location.href = '/';
+		} else {
+			console.error('Login failed');
+		}
+	};
+	const onError = (err) => console.log(err);
+
+	wcElement.addEventListener('success', onSuccess);
+	wcElement.addEventListener('error', onError);
+</script>
