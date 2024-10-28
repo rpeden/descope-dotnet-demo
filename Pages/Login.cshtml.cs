@@ -22,15 +22,13 @@ namespace DescopeTestApp.Pages
             Console.WriteLine("Getting");
         }
 
-        public async Task<IActionResult> OnPostAsync()//[FromBody]string jwtToken, [FromBody]string refreshToken) 
+        public async Task<IActionResult> OnPostAsync()
         {
             Console.WriteLine("Posting");
             try
             {
                 var sessionInfo = await _authClient.Auth.ValidateAndRefreshSession(JwtToken, RefreshToken);
                 var user = await _authClient.Auth.Me(RefreshToken);
-               
-                // Create claims for the authenticated user
 
                 Claim[] claims = [
                     new Claim(ClaimTypes.Name, user.Name),

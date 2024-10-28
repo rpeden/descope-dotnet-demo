@@ -6,7 +6,6 @@ using System.Security.Claims;
 
 namespace DescopeTestApp
 {
-	
 	public class AuthenticationMiddleware
 	{
 		private readonly RequestDelegate _next;
