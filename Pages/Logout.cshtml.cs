@@ -1,4 +1,5 @@
 using Descope;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -9,12 +10,13 @@ namespace DescopeTestApp.Pages
     {
         private readonly DescopeClient _authClient = authClient;
 
-        public void OnGet()
+        public async void OnGet()
         {
             var refreshToken = User.FindFirst("refreshToken")?.Value;
 
             if (refreshToken is not null) { 
-                _authClient.Auth.LogOut(refreshToken);
+                await _authClient.Auth.LogOut(refreshToken);
+                await HttpContext.SignOutAsync();
             }
         }
     }
