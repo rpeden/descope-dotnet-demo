@@ -1,0 +1,19 @@
+﻿@page
+@model DescopeTestApp.Pages.ProfileModel
+@{
+}
+
+<script src="https://static.descope.com/npm/@@descope/user-profile-widget@0.0.113/dist/index.js"></script>
+
+<descope-user-profile-widget project-id="your-project-id"
+							 widget-id="user-profile-widget"
+							 theme="light" />
+
+<script>
+	function onLogout(error) {
+	  window.location.reload();
+	}
+	const descopeWidgetEle = document.getElementsByTagName('descope-user-profile-widget')[0];
+	descopeWidgetEle.logout = onLogout;
+</script>
+
